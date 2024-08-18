@@ -1,20 +1,22 @@
 package JavaClass;
 
+import java.time.chrono.ChronoLocalDate;
+
 public abstract class Producto {
-    //atributos
+    //Atributos
     protected String id;
     protected String descripcion;
     protected int cantStock;
     protected double precio;
     protected double ganancia;
     protected boolean disponible;
-    protected double fechaVen;
+    protected ChronoLocalDate fechaVen;
     protected int calorias;
     protected boolean esComestible;
     protected boolean esImportado;
     protected double descuento;
 
-    //constructores
+    //Constructores
     public Producto(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado){
         generarId();
         this.descripcion = descripcion;
@@ -44,9 +46,7 @@ public abstract class Producto {
         return null;
     }
 
-//    public void esComestible() {
-//
-//    }
+
     //metodos abstractos
     public abstract void aplicarDescuento();
     public abstract void esImportado();

@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Tienda {
-
     private HashMap<String, Producto> productos;
-    private String nombre;
+    private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
     private int saldoCaja;
     
@@ -35,4 +34,11 @@ public class Tienda {
         this.numMaxStock = numMaxStock;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
