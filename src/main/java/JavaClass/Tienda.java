@@ -18,7 +18,6 @@ public class Tienda {
     }
 
     public void agregarProducto(Producto producto) {
-        String id = "";
         productos.put(producto.getId(), producto);
     }
 

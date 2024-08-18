@@ -3,10 +3,10 @@ package JavaClass;
 import java.util.Random;
 
 public class Limpieza extends Producto{
-    public Limpieza(String descripcion, double precio, int cantStock, double ganancia, boolean disponible) {
-        this.descripcion = descripcion;
-        this.precio = precio;
+    public Limpieza(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado) {
+        super(descripcion, precio, cantStock, ganancia, disponible, esImportado);
         id = generarId();
+
     }
 
     public String generarId() {

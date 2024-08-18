@@ -15,13 +15,14 @@ public abstract class Producto {
     protected double descuento;
 
     //constructores
-    public Producto(String descripcion, double precio, int cantStock, double ganancia, boolean disponible){
+    public Producto(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado){
         generarId();
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantStock = cantStock;
         this.ganancia = ganancia;
         this.disponible = disponible;
+        this.esImportado = esImportado;
 
     }
 

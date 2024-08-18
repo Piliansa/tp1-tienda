@@ -5,13 +5,11 @@ public class Bebida extends Producto {
     protected double gradAlcohol;
 
 
-    public Bebida(String descripcion, double precio, int cantStock, double ganancia, boolean disponible) {
+    public Bebida(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado, double gradAlcohol) {
+        super(descripcion, precio, cantStock, ganancia, disponible, esImportado);
+        this.gradAlcohol = gradAlcohol;
         id = generarId();
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.cantStock = cantStock;
-        this.ganancia = ganancia;
-        this.disponible = disponible;
+
     }
 
     public String generarId() {
