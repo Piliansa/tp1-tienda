@@ -1,4 +1,5 @@
 package Interfaces;
 
-public interface iPromocionable {
+public interface iPromocionable<P> {
+    public void aplicarDescuento();
 }

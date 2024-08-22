@@ -1,4 +1,4 @@
 package JavaClass.Builders;
 
-public class EnvasadoBuilder {
+public class EnvasadoBuilder extends ProductoBuilder{
 }

@@ -1,4 +1,5 @@
 package Interfaces;
 
-public interface IBuilder {
+public interface IBuilder<T> {
+    T build();
 }

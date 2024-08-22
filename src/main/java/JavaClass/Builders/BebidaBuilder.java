@@ -1,4 +1,5 @@
 package JavaClass.Builders;
 
-public class BebidaBuilder {
+public class BebidaBuilder extends ProductoBuilder{
+
 }

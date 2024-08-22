@@ -1,47 +1,88 @@
 package JavaClass;
+
 import Interfaces.iComestible;
-import java.util.Random;
+import java.time.LocalDate;
+
 
 public class Bebida extends Producto implements iComestible {
     protected double gradAlcohol;
 
 
-    public Bebida(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado, int gradAlcohol, int calorias) {
-        super(descripcion, precio, cantStock, ganancia, disponible, esImportado);
+    public Bebida(String id, String descripcion, double precioPorUnid, double porcentajeGanancia,
+                  boolean isDisponible, boolean isImportado, int cantStock,
+                  double gradAlcohol) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.precioPorUnid = precioPorUnid;
+        this.porcentajeGanancia = porcentajeGanancia;
+        this.isDisponible = isDisponible;
+        this.isImportado = isImportado;
+        this.tipoEnv = tipoEnv;
+        this.cantStock = cantStock;
         this.gradAlcohol = gradAlcohol;
-        calcularCalorias();
-        id = generarId();
+    }
 
+    public double getGradAlcohol() {
+        return gradAlcohol;
+    }
+
+    public void setGradAlcohol(double gradAlcohol) {
+        this.gradAlcohol = gradAlcohol;
     }
 
 
-
-    public String generarId() {
-        Random codProd = new Random();
-        int num = codProd.nextInt(900) + 100; //genera un numero entre 100 y 999
-        return "AB" + num;
-    }
-
-    private void calcularCalorias() {
-        if(gradAlcohol >= 0 && gradAlcohol <=2){
-            this.calorias = (int) gradAlcohol;
-        } else if (gradAlcohol > 2 && gradAlcohol <= 4.5){
-            this.calorias = (int)(gradAlcohol*1.25);
-        } else if (gradAlcohol > 4.5) {
-            this.calorias = (int)(gradAlcohol*1.5);
-        }
-    }
 
     @Override
-    public void aplicarDescuento() {
-
-    }
-    @Override
-    public void esImportado() {
-    }
-
-    @Override
-    public boolean esComestible() {
-        return esComestible = true;
+    public LocalDate getFechaVen() {
+        return null;
     }
 }
+
+//    public Bebida(String descripcion, double precio, int cantStock, double ganancia, boolean isDisponible, boolean esImportado, int gradAlcohol, int calorias, String tipoEnv, double descuento, LocalDate fechaVen) {
+//        super();
+//        this.gradAlcohol = gradAlcohol;
+//        calcularCalorias(iComestible.calorias);
+//        id = generarId();
+//        this.isDisponible = isDisponible;
+//        this.fechaVen = getFechaVen();
+//    }
+//
+//    public String generarId() {
+//        Random codProd = new Random();
+//        int num = codProd.nextInt(900) + 100; //genera un numero entre 100 y 999
+//        return "AB" + num;
+//    }
+//
+//    @Override
+//    public void esImportado() {
+//    }
+//
+//    @Override
+//    public double calcularCalorias(double calorias) {
+//        if(gradAlcohol >= 0 && gradAlcohol <=2) { return calorias;
+//        } else if (gradAlcohol > 2 && gradAlcohol <= 4.5){
+//            calorias = gradAlcohol*1.25;
+//        } else if (gradAlcohol > 4.5) {
+//            calorias = gradAlcohol*1.5;
+//        }
+//        return calorias;
+//    }
+//
+//    @Override
+//    public LocalDate getFechaVen() {
+//        return this.fechaVen;
+//    }
+//
+//
+//    public boolean isDisponible() {
+//
+//        LocalDate fechaActual = LocalDate.now();
+//        if (!fechaVen.isBefore(fechaActual)) {
+//            this.isDisponible = false;
+//            System.out.println("El producto " + this.descripcion + " está vencido, no está disponible.");
+//        }
+//        return isDisponible;
+//    }
+
+
+

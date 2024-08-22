@@ -1,4 +1,4 @@
 package JavaClass.Builders;
 
-public class LimpiezaBuilder {
+public class LimpiezaBuilder extends ProductoBuilder{
 }

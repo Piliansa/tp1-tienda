@@ -1,6 +1,12 @@
 package Interfaces;
 
+import java.time.LocalDate;
+
 public interface iComestible {
-    public boolean esComestible();
+    double calorias = 0;
+    LocalDate fechaVen = LocalDate.now();
+
+
+    LocalDate getFechaVen();
 
 }

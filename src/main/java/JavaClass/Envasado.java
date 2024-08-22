@@ -1,35 +1,54 @@
 package JavaClass;
 
-import Interfaces.iComestible;
-
-import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Random;
-
-public class Envasado extends Producto implements iComestible {
-    public Envasado(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado, ChronoLocalDate fechaVen) {
-        super (descripcion, precio, cantStock, ganancia, disponible, esImportado);
-        this.fechaVen = fechaVen;
-        id = generarId();
+public class Envasado extends Producto {
+    public Envasado(String id, String descripcion, double precioPorUnid,
+                    double porcentajeGanancia, boolean isDisponible,
+                    boolean isImportado, int calorias,int cantStock, String tipoEnv) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.precioPorUnid = precioPorUnid;
+        this.porcentajeGanancia = porcentajeGanancia;
+        this.isDisponible = isDisponible;
+        this.isImportado = isImportado;
+        this.calorias = calorias;
+        this.cantStock = cantStock;
+        this.tipoEnv = tipoEnv;
     }
 
-    public String generarId() {
-        Random codigoProd = new Random();
-        int num = codigoProd.nextInt(900) + 100; //genera un numero entre 100 y 999
-        return "AB" + num;
-    }
+    public Envasado() {
 
-    @Override
-    public void aplicarDescuento() {
-    }
-    @Override
-    public void esImportado() {
-    }
-
-    @Override
-    public boolean esComestible() {
-        LocalDate fechaActual = LocalDate.now();
-        this.esComestible = !fechaActual.isBefore(fechaVen);
-        return false;
     }
 }
+
+
+
+
+
+
+//    @Override
+//    public void esImportado() {
+//    }
+//
+//    @Override
+//    public double calcularCalorias(double calorias) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public LocalDate getFechaVen() {
+//        return this.fechaVen;
+//    }
+
+
+//    @Override
+//    public boolean esComestible() {
+//        LocalDate fechaActual = LocalDate.now();
+//        esComestible = fechaActual.isBefore(fechaVen);
+//        return esComestible;
+//    }
+
+
+//    @Override
+//    public boolean estaDisponible() {
+//        return disponible;
+//    }

@@ -1,24 +1,37 @@
 package JavaClass;
 
-import java.util.Random;
 
-public class Limpieza extends Producto{
-    public Limpieza(String descripcion, double precio, int cantStock, double ganancia, boolean disponible, boolean esImportado) {
-        super(descripcion, precio, cantStock, ganancia, disponible, esImportado);
-        id = generarId();
+public class Limpieza extends Producto  {
+        protected String tipoAplic;  //COCINA - BAÑO - ROPA - MULTIUSO
 
-    }
+        public Limpieza(String id, String descripcion, double precioPorUnid,
+                        double porcentajeGanancia, boolean isDisponible, boolean isImportado,
+                        int calorias, String tipoEnv, int cantStock, String tipoAplic) {
+                this.id = id;
+                this.descripcion = descripcion;
+                this.precioPorUnid = precioPorUnid;
+                this.porcentajeGanancia = porcentajeGanancia;
+                this.isDisponible = isDisponible;
+                this.isImportado = isImportado;
+                this.calorias = calorias;
+                this.tipoEnv = tipoEnv;
+                this.cantStock = cantStock;
+                this.tipoAplic = tipoAplic;
+        }
 
-    public String generarId() {
-        Random codProd = new Random();
-        int num = codProd.nextInt(900) + 100; //genera un numero entre 100 y 999
-        return "AZ" + num;
-    }
+        public String getTipoAplic() {
+                return tipoAplic;
+        }
 
-    @Override
-    public void aplicarDescuento() {
-    }
-    @Override
-    public void esImportado() {
-    }
+        public void setTipoAplic(String tipoAplic) {
+                this.tipoAplic = tipoAplic;
+        }
+
+
 }
+
+
+
+
+
+
