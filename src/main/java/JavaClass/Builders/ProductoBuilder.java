@@ -5,7 +5,9 @@ import JavaClass.Bebida;
 import JavaClass.Envasado;
 import JavaClass.Limpieza;
 
-public class ProductoBuilder implements IBuilder<ProductoBuilder> {
+import java.time.LocalDate;
+
+public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
 
     //Atributos
     private String descripcion;
@@ -18,6 +20,8 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder> {
     private double gradAlcohol;
     private String tipoAplic;
     private int cantStock;
+    private LocalDate fechaVen;
+    private boolean isComestible;
 
     //especificos para Ids:
     protected static int limpiezaCount = 0;
@@ -30,7 +34,8 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder> {
         this.descripcion = descripcion;
         return this;
     }
-//    public ProductoBuilder setCantStock(int cantStock) {
+
+    //    public ProductoBuilder setCantStock(int cantStock) {
 //        this.cantStock = cantStock;
 //        return this;
 //    }
@@ -38,10 +43,12 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder> {
         this.precioPorUnid = precioPorUnid;
         return this;
     }
+
     public ProductoBuilder setPorcentajeGanancia(double porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
         return this;
     }
+
     public ProductoBuilder setDisponible(boolean disponible) {
         this.isDisponible = disponible;
         return this;
@@ -51,48 +58,69 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder> {
         this.isImportado = importado;
         return this;
     }
+
     public ProductoBuilder setCalorias(int calorias) {
         this.calorias = calorias;
         return this;
     }
+
     public ProductoBuilder setTipoEnv(String tipoEnv) {
         this.tipoEnv = tipoEnv;
         return this;
     }
-    public ProductoBuilder setCantStock(int cantStock){
+
+    public ProductoBuilder setCantStock(int cantStock) {
         this.cantStock = cantStock;
         return this;
     }
+
     public ProductoBuilder setGradAlcohol(double gradAlcohol) {
         this.gradAlcohol = gradAlcohol;
         return this;
     }
 
+    public ProductoBuilder setTipoAplic(String tipoAplic) {
+        this.tipoAplic = tipoAplic;
+        return this;
+    }
+
+    public ProductoBuilder setFechaVen(int y, int m, int d) {
+        this.fechaVen = LocalDate.of(y, m, d);
+        return this;
+    }
 
     //Constructor Envasado:
-    public Envasado buildEnvasado(){
+    public Envasado buildEnvasado() {
         envasadoCount++;
         String id = generarId("AB", envasadoCount);
-        if(tipoEnv == null) throw new IllegalArgumentException("Debe añadir el tipo de envase");
-        return new Envasado(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, calorias, cantStock, tipoEnv);
+        if(isComestible) {
+            isDisponible = !LocalDate.now().isAfter(fechaVen);
+        }
+        if (tipoEnv == null) throw new IllegalArgumentException("Debe añadir el tipo de envase");
+        return new Envasado(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, calorias, cantStock, tipoEnv, isComestible);
     }
 
     //Constructor Bebida
     public Bebida buildBebida() {
         bebidaCount++;
         String id = generarId("AC", bebidaCount);
-        if (gradAlcohol < 0) throw new IllegalArgumentException("Escriba la graduacion alcoholica, si es sin alcohol escriba 0, por favor.");
-        return new Bebida(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, cantStock, gradAlcohol);
+        if (fechaVen == null){
+            throw new IllegalArgumentException("La fecha de vencimiento sebe ser especificada.");
+        }
+        isDisponible = !LocalDate.now().isAfter(fechaVen);
+        if (gradAlcohol < 0)
+            throw new IllegalArgumentException("Escriba la graduacion alcoholica, si es sin alcohol escriba 0, por favor.");
+        return new Bebida(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, cantStock, gradAlcohol, fechaVen, isComestible);
     }
 
     //Constructor Limpieza
-    public Limpieza buildLimpieza(){
+    public Limpieza buildLimpieza() {
         limpiezaCount++;
         String id = generarId("AZ", limpiezaCount);
         if (tipoAplic == null) {
             throw new IllegalArgumentException("Debe especificar el tipo de aplicación.");
         }
-        return  new Limpieza(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, calorias, tipoEnv, cantStock, tipoAplic);
+        return new Limpieza(id, descripcion, precioPorUnid, porcentajeGanancia, isDisponible, isImportado, calorias, tipoEnv, cantStock, tipoAplic);
     }
 
 

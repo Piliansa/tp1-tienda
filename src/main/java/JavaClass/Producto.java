@@ -1,5 +1,7 @@
 package JavaClass;
 
+import java.time.LocalDate;
+
 public class Producto {
     //Atributos
     protected String id;
@@ -11,6 +13,10 @@ public class Producto {
     protected boolean isImportado;
     protected int calorias;
     protected String tipoEnv;
+    protected LocalDate fechaVen;
+    protected boolean isComestible;
+
+
 //    protected int calorias;
 
     //Constructor vacio
@@ -53,6 +59,8 @@ public class Producto {
 
     public String getTipoEnv() {return tipoEnv;}
 
+    public LocalDate getFechaVen() {return fechaVen;}
+
     public String setId(String id) {
         this.id = id;
         return id;
@@ -86,6 +94,14 @@ public class Producto {
         this.calorias = calorias;
     }
 
+    public void setTipoEnv(String tipoEnv) {
+        this.tipoEnv = tipoEnv;
+    }
+
+    public void setFechaVen(LocalDate fechaVen) {
+        this.fechaVen = fechaVen;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -99,6 +115,8 @@ public class Producto {
                 ", calorias=" + calorias +
                 '}';
     }
+
+
 
     //Constructor
 

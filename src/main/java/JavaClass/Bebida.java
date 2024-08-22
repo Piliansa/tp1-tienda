@@ -1,16 +1,17 @@
 package JavaClass;
 
-import Interfaces.iComestible;
 import java.time.LocalDate;
 
 
-public class Bebida extends Producto implements iComestible {
+
+
+public class Bebida extends Producto {
     protected double gradAlcohol;
 
 
     public Bebida(String id, String descripcion, double precioPorUnid, double porcentajeGanancia,
                   boolean isDisponible, boolean isImportado, int cantStock,
-                  double gradAlcohol) {
+                  double gradAlcohol, LocalDate fechaVen, boolean isComestible) {
         this.id = id;
         this.descripcion = descripcion;
         this.precioPorUnid = precioPorUnid;
@@ -20,6 +21,8 @@ public class Bebida extends Producto implements iComestible {
         this.tipoEnv = tipoEnv;
         this.cantStock = cantStock;
         this.gradAlcohol = gradAlcohol;
+        this.isComestible = isComestible;
+        this.fechaVen = fechaVen;
     }
 
     public double getGradAlcohol() {
@@ -32,10 +35,7 @@ public class Bebida extends Producto implements iComestible {
 
 
 
-    @Override
-    public LocalDate getFechaVen() {
-        return null;
-    }
+
 }
 
 //    public Bebida(String descripcion, double precio, int cantStock, double ganancia, boolean isDisponible, boolean esImportado, int gradAlcohol, int calorias, String tipoEnv, double descuento, LocalDate fechaVen) {

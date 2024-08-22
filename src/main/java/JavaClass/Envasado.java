@@ -1,9 +1,11 @@
 package JavaClass;
 
+import java.time.LocalDate;
+
 public class Envasado extends Producto {
     public Envasado(String id, String descripcion, double precioPorUnid,
                     double porcentajeGanancia, boolean isDisponible,
-                    boolean isImportado, int calorias,int cantStock, String tipoEnv) {
+                    boolean isImportado, int calorias, int cantStock, String tipoEnv, boolean isComestible) {
         this.id = id;
         this.descripcion = descripcion;
         this.precioPorUnid = precioPorUnid;
@@ -13,9 +15,10 @@ public class Envasado extends Producto {
         this.calorias = calorias;
         this.cantStock = cantStock;
         this.tipoEnv = tipoEnv;
+        this.isComestible = isComestible;
     }
 
-    public Envasado() {
+    public Envasado(String id, String descripcion, double precioPorUnid, double porcentajeGanancia, boolean isDisponible, boolean isImportado, int calorias, int cantStock, boolean isComestible) {
 
     }
 }

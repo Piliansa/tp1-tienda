@@ -2,6 +2,8 @@ package JavaClass;
 
 import java.util.*;
 
+import static java.util.spi.ToolProvider.findFirst;
+
 public class Tienda extends Producto{
     private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
@@ -19,13 +21,16 @@ public class Tienda extends Producto{
 
             double costoTotalProducto = producto.getPrecioPorUnid() * producto.getCantStock();
             if (costoTotalProducto > saldoCaja) {
-                System.out.println("No se puede agregar el producto por saldo insuficiente.");
+                System.out.println("No se puede agregar el producto por saldo insuficiente en la caja.");
+            } else if (productosAComprar.size() > cantStockInventario) {
+                throw new RuntimeException("No se puede agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock");
             } else {
                 saldoCaja -= costoTotalProducto;
                 productosAComprar.add(producto);
                 cantStockInventario = productosAComprar.size() + cantStockInventario;
                 System.out.println("producto agregado");
                 System.out.println("la cantidad de productos en lista son: " + cantStockInventario);
+                System.out.println("El saldo de la caja es: " + saldoCaja);
             }
 
             mostrarProductos();
@@ -47,6 +52,17 @@ public class Tienda extends Producto{
                     };
         };
 
+
+    }
+
+    public void venderProductos(){
+        final int maximoDeVentaTipo = 3;
+        final int maximoPorProducto = 12;
+
+        List<Producto> productosAVender = new ArrayList<>();
+
+        Producto productoFiltro = (Producto) productosAVender.stream()
+                .filter(prod->prod.getDescripcion()->descripcion)
 
     }
 
