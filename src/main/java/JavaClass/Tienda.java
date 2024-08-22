@@ -6,8 +6,8 @@ public class Tienda extends Producto{
     private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
     private double saldoCaja = 10000000;
-    private List<Producto> productosEnStock = new ArrayList<>();
-    private int cantStock = productosEnStock.size();
+    private List<Producto> productosAComprar = new ArrayList<>();
+    private int cantStockInventario = productosAComprar.size();
 
 
     public Tienda() {
@@ -22,9 +22,10 @@ public class Tienda extends Producto{
                 System.out.println("No se puede agregar el producto por saldo insuficiente.");
             } else {
                 saldoCaja -= costoTotalProducto;
-                productosEnStock.add(producto);
+                productosAComprar.add(producto);
+                cantStockInventario = productosAComprar.size() + cantStockInventario;
                 System.out.println("producto agregado");
-                System.out.println("la cantidad de productos en lista son: " + productosEnStock.size());
+                System.out.println("la cantidad de productos en lista son: " + cantStockInventario);
             }
 
             mostrarProductos();
@@ -32,16 +33,11 @@ public class Tienda extends Producto{
     }
 
 
-
-    private int comprobarStock() {
-        cantStock = productosEnStock.size();
-        return cantStock;
-    }
     public void mostrarProductos() {
-        if(productosEnStock.isEmpty()){
+        if(productosAComprar.isEmpty()){
             System.out.println("no hay productos en stock");
         } else {
-                    for(Producto producto : productosEnStock) {
+                    for(Producto producto : productosAComprar) {
                         System.out.println("Producto Id: " + producto.getId());
                         System.out.println("Descripción: " + producto.getDescripcion());
                         System.out.println("Cantidad de Stock comprado: " + producto.getCantStock());
