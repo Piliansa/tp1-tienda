@@ -109,6 +109,11 @@ public class Producto {
         isComestible = comestible;
     }
 
+    protected double setPrecioPorUnidad(double v) {
+        this.precioPorUnid = v;
+        return this.precioPorUnid;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -123,16 +128,10 @@ public class Producto {
                 '}';
     }
 
-    protected double setPrecioPorUnidad(double v) {
-        this.precioPorUnid = v;
-        return this.precioPorUnid;
-    }
 
 
-    //Constructor
 
 
-    //metodos
 
 
 

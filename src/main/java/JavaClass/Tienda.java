@@ -109,20 +109,22 @@ public class Tienda extends Producto implements IVendible {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
-
                 productosFiltro.add(producto);
-
-
             }
+            producto.setCantStock(producto.getCantStock() - cantProdAAVender);
             totalVenta = cantProdAAVender*producto.getPrecioPorUnid();
             saldoCaja = saldoCaja + totalVenta;
-            System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + " precio Total: " + totalVenta + " El saldo de caja es" + saldoCaja);
+            System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + "\n precio Total: $" + totalVenta + "\n El saldo de caja es $ " + saldoCaja + "\n" + producto.cantStock + " Es lo que queda de producto en stock");
 
-
+        mostrarStockTotal();
         };
+    public void mostrarStockTotal(){
+        int stockTotal = productosAComprar.stream()
+                .mapToInt(Producto::getCantStock)
+                .sum();
+
+        System.out.println("El stock total de la tienda es de " + stockTotal + " productos.");
+    }
 }
 
 
