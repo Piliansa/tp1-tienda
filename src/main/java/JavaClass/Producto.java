@@ -123,6 +123,10 @@ public class Producto {
                 '}';
     }
 
+    protected double setPrecioPorUnidad(double v) {
+        this.precioPorUnid = v;
+        return this.precioPorUnid;
+    }
 
 
     //Constructor

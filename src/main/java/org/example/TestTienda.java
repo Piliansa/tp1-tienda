@@ -115,7 +115,10 @@ public class TestTienda extends Tienda {
         tienda.comprarProducto(lavandina);
         tienda.comprarProducto(limpiaVidrio);
         tienda.mostrarProductos();
-        tienda.venderProductos();
+        for(int i = 0; i < 3; i++){
+            tienda.venderProductos();
+        }
+
 //        tienda.mostrarProductos();
 
 

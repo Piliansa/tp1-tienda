@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Tienda extends Producto implements IVendible {
     private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
-    private static double saldoCaja = 10000000;
+    private double saldoCaja = 10000000;
     private List<Producto> productosAComprar = new ArrayList<>();
     private int cantStockInventario = productosAComprar.size();
 
@@ -65,7 +65,7 @@ public class Tienda extends Producto implements IVendible {
         final int numMaxProdCate = 12;
 
 
-        for (int i = 0; i < numMaxVenta; i++) {
+
 
             System.out.println("Ingrese el código del tipo de producto, donde AC = Bebida / AB = Envasado / AZ = Limpieza");
             CharSequence claveProd = scanner.nextLine();
@@ -94,38 +94,37 @@ public class Tienda extends Producto implements IVendible {
             if (cantProdAAVender > producto.cantStock) {
                 cantProdAAVender = producto.cantStock; //se vende solo la cantidad disponible
             }
-            try {
-                if (producto.isComestible) {
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
-                    totalVenta = producto.precioPorUnid * cantProdAAVender;
-                } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.1);
-                    totalVenta = producto.precioPorUnid * cantProdAAVender;
-                } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) {
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
-                    totalVenta = producto.precioPorUnid * cantProdAAVender;
+            if (producto.isComestible) {
+                producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
+                totalVenta = producto.precioPorUnid * cantProdAAVender;
+            } else if(!producto.isComestible && claveProd == "AZ"){ //Los de limpieza son siempre NO COMESTIBLES
+                try {
+                        if (Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
+                            producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.1); //suma el porcentaje de ganancia que no puede superar el 10%
+                        } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) { //salvo los "MULTIUSO" O "COCINA" que no tienen minimo en este caso le ponemos un 20%
+                            producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2);
+                        }
+                } catch (ArithmeticException e) {
+                    System.out.println("Hubo un error de cálculo");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                totalVenta *= cantProdAAVender;
-                System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + " precio Total: " + totalVenta);
 
-            } catch (ArithmeticException e) {
-                System.out.println("Hubo un error de cálculo");
-            } catch (Exception e) {
-                e.printStackTrace();
+
+
+
+                productosFiltro.add(producto);
+
+
             }
-            productosFiltro.add(producto);
+            totalVenta = cantProdAAVender*producto.getPrecioPorUnid();
+            saldoCaja = saldoCaja + totalVenta;
+            System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + " precio Total: " + totalVenta + " El saldo de caja es" + saldoCaja);
 
 
-            if (i > numMaxVenta - 1) {
-                System.out.println("Desea hacer otra compra?: SI/NO");
-                String respuesta = scanner.nextLine();
-                if (!respuesta.equalsIgnoreCase("S")) {
-                    break;
-                }
-            }
-        }
-    }
-};
+        };
+}
+
 
 
 //        System.out.println(productosFiltro.);
