@@ -3,7 +3,7 @@ package JavaClass;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Producto {
+public abstract class Producto {
     //Atributos
     protected String id;
     protected String descripcion;
@@ -20,9 +20,7 @@ public class Producto {
     protected int descuento;
 
 
-    public void setDescuento(int descuento) {
-        this.descuento = descuento;
-    }
+
 
     public int getDescuento() {
         return descuento;
@@ -83,21 +81,10 @@ public class Producto {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    protected double getPrecioConDescuento() {
+        precioPorUnid = precioPorUnid - ((precioPorUnid * descuento) / 100);
+        return precioPorUnid;
+    }
 }
 
 

@@ -113,9 +113,9 @@ public class Tienda extends Producto implements IVendible {
             } else if(!producto.isComestible && claveProd == "AZ"){ //Los de limpieza son siempre NO COMESTIBLES
                 try {
                         if (producto.tipoAplic == "BAÑO"|| producto.tipoAplic == "ROPA") {
-                            producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.1); //suma el porcentaje de ganancia que no puede superar el 10%
+                            producto.setPrecioPorUnidad(producto.getPrecioConDescuento()); //suma el porcentaje de ganancia que no puede superar el 10%
                         } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) { //salvo los "MULTIUSO" O "COCINA" que no tienen minimo en este caso le ponemos un 20%
-                            producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2);
+                            producto.setPrecioPorUnidad(producto.getPrecioConDescuento());
                         }
                 } catch (ArithmeticException e) {
                     System.out.println("Hubo un error de cálculo");
@@ -125,8 +125,9 @@ public class Tienda extends Producto implements IVendible {
                 productosFiltro.add(producto);
             }
             producto.setCantStock(producto.getCantStock() - cantProdAAVender);
+
             totalVenta = cantProdAAVender*producto.getPrecioPorUnid();
-            saldoCaja = saldoCaja + totalVenta;
+            saldoCaja = saldoCaja + totalVenta ;
             System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + "\n precio Total: $" + totalVenta + "\n El saldo de caja es $ " + saldoCaja + "\n" + producto.cantStock + " Es lo que queda de producto en stock");
 
         mostrarStockTotal();
@@ -138,6 +139,8 @@ public class Tienda extends Producto implements IVendible {
 
         System.out.println("El stock total de la tienda es de " + stockTotal + " productos.");
     }
+
+
 
     public void obtenerComestiblesConMenorDescuento(int porcentaje_descuento){
 

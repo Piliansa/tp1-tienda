@@ -24,6 +24,7 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
     private int cantStock;
     private LocalDate fechaVen;
     private boolean isComestible;
+    private int descuento;
 
     public ProductoBuilder setDescuento(int descuento) {
         return this;
@@ -83,6 +84,11 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
     public ProductoBuilder isComestible(boolean b) {
         this.isComestible = b;
         return this;
+    }
+
+
+    public double getPrecioConDescuento(){
+        return precioPorUnid - (precioPorUnid * descuento/100);
     }
 
     //Constructor Envasado:
