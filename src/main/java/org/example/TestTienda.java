@@ -50,20 +50,21 @@ public class TestTienda extends Tienda {
                 .buildBebida();
 
 
-        Producto limpieza1 = new LimpiezaBuilder()
-                .setDescripcion("Limpia vidrios")
-                .setPrecioPorUnid(250)
-                .setPorcentajeGanancia(15)
-                .setDisponible(true)
-                .setCantStock(20)
-                .setTipoEnv("plastico")
-                .setTipoAplic("MULTIUSO")
-                .buildLimpieza();
+//        Producto limpieza1 = new LimpiezaBuilder()
+//                .setDescripcion("Limpia vidrios")
+//                .setPrecioPorUnid(250)
+//                .setPorcentajeGanancia(15)
+//                .setDisponible(true)
+//                .setCantStock(20)
+//                .setTipoEnv("plastico")
+//                .setTipoAplic("MULTIUSO")
+//                .buildLimpieza();
 
         tienda.comprarProducto(envasado1);
         tienda.comprarProducto(envasado2);
         tienda.comprarProducto(bebida1);
         tienda.mostrarProductos();
+        tienda.venderProductos();
 
 
     }

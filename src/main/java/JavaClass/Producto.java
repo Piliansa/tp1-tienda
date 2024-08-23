@@ -30,7 +30,7 @@ public class Producto {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public int getCantStock() {
