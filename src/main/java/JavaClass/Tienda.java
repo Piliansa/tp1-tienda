@@ -4,6 +4,7 @@ import Interfaces.IVendible;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 
 public class Tienda extends Producto implements IVendible {
@@ -62,7 +63,6 @@ public class Tienda extends Producto implements IVendible {
     @Override
     public void venderProductos() {
         List<Producto> list = new ArrayList<>();
-        AtomicReference<Double> totalVenta = new AtomicReference<>((double) 0);
         final int numMaxVenta = 3;
         final int numMaxProdCate = 12;
 
@@ -78,21 +78,33 @@ public class Tienda extends Producto implements IVendible {
             .filter(producto -> producto.getId().contains(claveProd))
             .filter(producto -> producto.isDisponible)
             .filter(producto -> producto.descripcion.equals(nombreProd))
+            .collect(Collectors.toSet())
             .forEach(producto -> {
                 System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
                 int cantAVender = scanner.nextInt();
-
                 if(cantAVender>numMaxProdCate) {
                     System.out.println("No se pueden vender mas de 12 productos");
-                    cantAVender = 12;;
-                } else if (cantAVender>producto.cantStock) {
+                    cantAVender = 12;
+                }
+                if (cantAVender>producto.cantStock) {
                     System.out.println("No hay suficiente stock, se venderán " + producto.cantStock + " unidades.");
                     cantAVender = cantStock;
-                } else if ()
-               totalVenta.set(producto.precioPorUnid * cantAVender);
+                }
+                if (producto.isComestible){
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.2);
+                }
+                if(claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA") ) {
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.1);
+                }
+                if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")  ) {
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.2);
+                }
+                producto.cantStock = producto.cantStock - cantAVender;
+                System.out.println(producto.id + producto.descripcion + cantAVender + " X " + producto.precioPorUnid + producto.isComestible);
 
-                System.out.println(producto.descripcion + totalVenta);
             });
+
+
     ;
 
 

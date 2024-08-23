@@ -89,6 +89,11 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
         return this;
     }
 
+    public ProductoBuilder isComestible(boolean b) {
+        this.isComestible = b;
+        return this;
+    }
+
     //Constructor Envasado:
     public Envasado buildEnvasado() {
         envasadoCount++;

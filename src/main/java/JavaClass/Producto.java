@@ -15,6 +15,7 @@ public class Producto {
     protected String tipoEnv;
     protected LocalDate fechaVen;
     protected boolean isComestible;
+    protected String tipoAplic;
 
 
 //    protected int calorias;
@@ -61,6 +62,8 @@ public class Producto {
 
     public LocalDate getFechaVen() {return fechaVen;}
 
+
+
     public String setId(String id) {
         this.id = id;
         return id;
@@ -100,6 +103,10 @@ public class Producto {
 
     public void setFechaVen(LocalDate fechaVen) {
         this.fechaVen = fechaVen;
+    }
+
+    public void setComestible(boolean comestible) {
+        isComestible = comestible;
     }
 
     @Override

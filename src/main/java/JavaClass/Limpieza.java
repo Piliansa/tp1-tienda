@@ -19,13 +19,7 @@ public class Limpieza extends Producto  {
                 this.tipoAplic = tipoAplic;
         }
 
-        public String getTipoAplic() {
-                return tipoAplic;
-        }
 
-        public void setTipoAplic(String tipoAplic) {
-                this.tipoAplic = tipoAplic;
-        }
 
 
 }

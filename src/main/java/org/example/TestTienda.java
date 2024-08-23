@@ -45,6 +45,7 @@ public class TestTienda extends Tienda {
                 .setCalorias(5000)
                 .setCantStock(5)
                 .setTipoEnv("plastico")
+                .isComestible(true)
                 .setGradAlcohol(1)
                 .setFechaVen(2026, 3,5)
                 .buildBebida();
