@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Tienda extends Producto implements IVendible {
     private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
-    private double saldoCaja = 10000000;
+    private static double saldoCaja = 10000000;
     private List<Producto> productosAComprar = new ArrayList<>();
     private int cantStockInventario = productosAComprar.size();
 
@@ -67,45 +67,49 @@ public class Tienda extends Producto implements IVendible {
         final int numMaxProdCate = 12;
 
 
+        for (int i = 1;i < 3;i++){
+            System.out.println("Ingrese el código del tipo de producto, donde AC = Bebida / AB = Envasado / AZ = Limpieza");
+            Scanner scanner = new Scanner(System.in);
+            CharSequence claveProd;
+            claveProd = scanner.nextLine();
+            System.out.println("Ingrese el nombre del Producto que quiere vender");
+            String nombreProd = scanner.nextLine();
+            productosAComprar.stream()
+                    .filter(producto -> producto.getId().contains(claveProd))
+                    .filter(producto -> producto.isDisponible)
+                    .filter(producto -> producto.descripcion.equals(nombreProd))
+                    .collect(Collectors.toSet())
+                    .forEach(producto -> {
+                        System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
+                        int cantAVender = scanner.nextInt();
+                        if (cantAVender > numMaxProdCate) {
+                            System.out.println("No se pueden vender mas de 12 productos");
+                            cantAVender = 12;
+                        }
+                        if (cantAVender > producto.cantStock) {
+                            System.out.println("No hay suficiente stock, se venderán " + producto.cantStock + " unidades.");
+                            cantAVender = cantStock;
+                        }
+                        try {
+                            if (producto.isComestible) {
+                                producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
+                            }
+                        } catch (ArithmeticException e) {
+                            System.out.println("Hubo un error");
+                        }
 
-    System.out.println("Ingrese el código del tipo de producto, donde AC = Bebida / AB = Envasado / AZ = Limpieza");
-    Scanner scanner = new Scanner(System.in);
-    CharSequence claveProd;
-    claveProd = scanner.nextLine();
-    System.out.println("Ingrese el nombre del Producto que quiere vender");
-    String nombreProd = scanner.nextLine();
-    productosAComprar.stream()
-            .filter(producto -> producto.getId().contains(claveProd))
-            .filter(producto -> producto.isDisponible)
-            .filter(producto -> producto.descripcion.equals(nombreProd))
-            .collect(Collectors.toSet())
-            .forEach(producto -> {
-                System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
-                int cantAVender = scanner.nextInt();
-                if(cantAVender>numMaxProdCate) {
-                    System.out.println("No se pueden vender mas de 12 productos");
-                    cantAVender = 12;
-                }
-                if (cantAVender>producto.cantStock) {
-                    System.out.println("No hay suficiente stock, se venderán " + producto.cantStock + " unidades.");
-                    cantAVender = cantStock;
-                }
-                if (producto.isComestible){
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.2);
-                }
-                if(claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA") ) {
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.1);
-                }
-                if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")  ) {
-                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid*0.2);
-                }
-                producto.cantStock = producto.cantStock - cantAVender;
-                System.out.println(producto.id + producto.descripcion + cantAVender + " X " + producto.precioPorUnid + producto.isComestible);
+                        if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
+                            producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.1);
+                        }
+                        if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) {
+                            producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
+                        }
+                        producto.cantStock = producto.cantStock - cantAVender;
+                        System.out.println(producto.id + producto.descripcion + cantAVender + " X " + producto.precioPorUnid + producto.isComestible);
 
-            });
+                    });
+            }
 
-
-    ;
 
 
     };
