@@ -1,10 +1,9 @@
 package org.example;
 
-import JavaClass.Bebida;
+
 import JavaClass.Builders.BebidaBuilder;
 import JavaClass.Builders.EnvasadoBuilder;
 import JavaClass.Builders.LimpiezaBuilder;
-import JavaClass.Envasado;
 import JavaClass.Producto;
 import JavaClass.Tienda;
 
@@ -106,6 +105,7 @@ public class TestTienda extends Tienda {
                 .setFechaVen(2026, 3,5)
                 .buildBebida();
 
+        //Hago algunas compras para agregar productos a mi inventario
         tienda.comprarProducto(galletita);
         tienda.comprarProducto(arroz);
         tienda.comprarProducto(cerveza);
@@ -114,9 +114,12 @@ public class TestTienda extends Tienda {
         tienda.comprarProducto(trapo);
         tienda.comprarProducto(lavandina);
         tienda.comprarProducto(limpiaVidrio);
+        //Muestro los productos en stock
         tienda.mostrarProductos();
+
+        //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
         for(int i = 0; i < 3; i++){
-            tienda.venderProductos();
+            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
         }
 
 //        tienda.mostrarProductos();

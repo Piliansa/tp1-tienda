@@ -11,6 +11,7 @@ public class Tienda extends Producto implements IVendible {
     private String nombre = "Tienda Farolito";
     private int numMaxStock = 500;
     private double saldoCaja = 10000000;
+    private final static double IVA = 0.21;
     private List<Producto> productosAComprar = new ArrayList<>();
     private int cantStockInventario = productosAComprar.size();
 
@@ -19,8 +20,8 @@ public class Tienda extends Producto implements IVendible {
     }
 
     public void comprarProducto(Producto producto) {
-
-        double costoTotalProducto = producto.getPrecioPorUnid() * producto.getCantStock();
+        double costoTotalProdSinIva = producto.getPrecioPorUnid() * producto.getCantStock();
+        double costoTotalProducto = producto.getPrecioPorUnid() * producto.getCantStock() + (producto.getPrecioPorUnid()*IVA) * producto.getCantStock();
         if (costoTotalProducto > saldoCaja) {
             System.out.println("No se puede agregar el producto por saldo insuficiente en la caja.");
         } else if (productosAComprar.size() > cantStockInventario) {
@@ -32,9 +33,11 @@ public class Tienda extends Producto implements IVendible {
             System.out.println("producto agregado");
             System.out.println("la cantidad de productos en lista son: " + cantStockInventario);
             System.out.println("El saldo de la caja es: " + saldoCaja);
+            System.out.println("Sin iva: " + costoTotalProdSinIva);
+            System.out.println("Productos con iva: " + costoTotalProducto);
         }
 
-        mostrarProductos();
+
 
     }
 
@@ -94,9 +97,11 @@ public class Tienda extends Producto implements IVendible {
             if (cantProdAAVender > producto.cantStock) {
                 cantProdAAVender = producto.cantStock; //se vende solo la cantidad disponible
             }
+            if(producto.isImportado){
+                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.12);
+            }
             if (producto.isComestible) {
-                producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
-                totalVenta = producto.precioPorUnid * cantProdAAVender;
+                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2); //Los productos comestibles no pueden superar un 20% de ganancia
             } else if(!producto.isComestible && claveProd == "AZ"){ //Los de limpieza son siempre NO COMESTIBLES
                 try {
                         if (Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
