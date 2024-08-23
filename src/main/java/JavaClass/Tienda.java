@@ -7,8 +7,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 
+
+
 public class Tienda extends Producto implements IVendible {
-    private String nombre = "Tienda Farolito";
+    private String nombre;
     private int numMaxStock = 500;
     private double saldoCaja = 10000000;
     private final static double IVA = 0.21;
@@ -17,6 +19,14 @@ public class Tienda extends Producto implements IVendible {
 
 
     public Tienda() {
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void saludar() {
+        System.out.println("¡BIENVENIDOS A TIENDA " + nombre + "!");
     }
 
     public void comprarProducto(Producto producto) {
@@ -102,7 +112,7 @@ public class Tienda extends Producto implements IVendible {
                 producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2); //Los productos comestibles no pueden superar un 20% de ganancia
             } else if(!producto.isComestible && claveProd == "AZ"){ //Los de limpieza son siempre NO COMESTIBLES
                 try {
-                        if (Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
+                        if (producto.tipoAplic == "BAÑO"|| producto.tipoAplic == "ROPA") {
                             producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.1); //suma el porcentaje de ganancia que no puede superar el 10%
                         } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) { //salvo los "MULTIUSO" O "COCINA" que no tienen minimo en este caso le ponemos un 20%
                             producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2);
@@ -129,21 +139,21 @@ public class Tienda extends Producto implements IVendible {
         System.out.println("El stock total de la tienda es de " + stockTotal + " productos.");
     }
 
-    public void obtenerComestiblesConMenorDescuento(double porcentaje_descuento){
-        try{
-            List<Producto> listaProdConDesc = productosAComprar.stream()
-                    .filter(prod -> isComestible)
+    public void obtenerComestiblesConMenorDescuento(int porcentaje_descuento){
+
+            List<String> descripcionesProdConMenorDesc = productosAComprar.stream()
+                    .filter(prod ->prod.isComestible)
                     .filter(prod -> !prod.isImportado)
-                    .filter(prod -> prod.descuento < porcentaje_descuento)
+                    .filter(prod -> prod.getDescuento() < porcentaje_descuento)
                     .sorted(Comparator.comparingDouble(Producto::getDescuento))
+                    .map(Producto::getDescripcion)
                     .collect(Collectors.toList());
-            listaProdConDesc.forEach(prod -> System.out.println(prod.getDescripcion()));
+
+
+        System.out.println("Los productos No Importados con menor descuento son: " + descripcionesProdConMenorDesc);
 
 
 
-        } catch (RuntimeException e){
-            System.out.println("No se pudo hacer la operacion");
-        }
 
 
     }

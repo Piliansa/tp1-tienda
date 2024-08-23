@@ -4,8 +4,10 @@ import Interfaces.IBuilder;
 import JavaClass.Bebida;
 import JavaClass.Envasado;
 import JavaClass.Limpieza;
+import JavaClass.Producto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
 
@@ -23,74 +25,7 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
     private LocalDate fechaVen;
     private boolean isComestible;
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public double getPrecioPorUnid() {
-        return precioPorUnid;
-    }
-
-    public double getPorcentajeGanancia() {
-        return porcentajeGanancia;
-    }
-
-    public boolean isDisponible() {
-        return isDisponible;
-    }
-
-    public boolean isImportado() {
-        return isImportado;
-    }
-
-    public int getCalorias() {
-        return calorias;
-    }
-
-    public String getTipoEnv() {
-        return tipoEnv;
-    }
-
-    public double getGradAlcohol() {
-        return gradAlcohol;
-    }
-
-    public String getTipoAplic() {
-        return tipoAplic;
-    }
-
-    public int getCantStock() {
-        return cantStock;
-    }
-
-    public LocalDate getFechaVen() {
-        return fechaVen;
-    }
-
-    public boolean isComestible() {
-        return isComestible;
-    }
-
-    public int getDescuento() {
-        return descuento;
-    }
-
-    public static int getLimpiezaCount() {
-        return limpiezaCount;
-    }
-
-    public static int getEnvasadoCount() {
-        return envasadoCount;
-    }
-
-    public static int getBebidaCount() {
-        return bebidaCount;
-    }
-
-    private int descuento;
-
     public ProductoBuilder setDescuento(int descuento) {
-        this.descuento = descuento;
         return this;
     }
 
@@ -105,61 +40,46 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
         this.descripcion = descripcion;
         return this;
     }
-
-    //    public ProductoBuilder setCantStock(int cantStock) {
-//        this.cantStock = cantStock;
-//        return this;
-//    }
     public ProductoBuilder setPrecioPorUnid(double precioPorUnid) {
         this.precioPorUnid = precioPorUnid;
         return this;
     }
-
     public ProductoBuilder setPorcentajeGanancia(double porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
         return this;
     }
-
     public ProductoBuilder setDisponible(boolean disponible) {
         this.isDisponible = disponible;
         return this;
     }
-
     public ProductoBuilder setImportado(boolean importado) {
         this.isImportado = importado;
         return this;
     }
-
     public ProductoBuilder setCalorias(int calorias) {
         this.calorias = calorias;
         return this;
     }
-
     public ProductoBuilder setTipoEnv(String tipoEnv) {
         this.tipoEnv = tipoEnv;
         return this;
     }
-
     public ProductoBuilder setCantStock(int cantStock) {
         this.cantStock = cantStock;
         return this;
     }
-
     public ProductoBuilder setGradAlcohol(double gradAlcohol) {
         this.gradAlcohol = gradAlcohol;
         return this;
     }
-
     public ProductoBuilder setTipoAplic(String tipoAplic) {
         this.tipoAplic = tipoAplic;
         return this;
     }
-
     public ProductoBuilder setFechaVen(int y, int m, int d) {
         this.fechaVen = LocalDate.of(y, m, d);
         return this;
     }
-
     public ProductoBuilder isComestible(boolean b) {
         this.isComestible = b;
         return this;
@@ -211,7 +131,5 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
         }
         return letras + String.format("%03d", count);
     }
-
-
 
 }

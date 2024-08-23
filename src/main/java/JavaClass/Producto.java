@@ -1,6 +1,7 @@
 package JavaClass;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Producto {
     //Atributos
@@ -17,6 +18,7 @@ public class Producto {
     protected boolean isComestible;
     protected String tipoAplic;
     protected int descuento;
+
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
@@ -44,6 +46,8 @@ public class Producto {
     public double getPrecioPorUnid() {
         return precioPorUnid;
     }
+    public boolean getIsImportado() {return isImportado;}
+    public boolean getIsComestible() {return isComestible;}
 
     public String setId(String id) {
         this.id = id;
@@ -78,20 +82,7 @@ public class Producto {
         return this.precioPorUnid;
     }
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "id='" + id + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", cantStock=" + cantStock +
-                ", precioPorUnid=" + precioPorUnid +
-                ", porcentajeGanancia=" + porcentajeGanancia +
-                ", isDisponible=" + isDisponible +
-                ", isImportado=" + isImportado +
-                ", Porcentaje de Descuento a aplicar: " + descuento +
-                ", calorias=" + calorias +
-                '}';
-    }
+
 
 
 

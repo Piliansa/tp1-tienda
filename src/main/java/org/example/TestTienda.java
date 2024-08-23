@@ -11,8 +11,8 @@ public class TestTienda extends Tienda {
     public static void main(String[] args) {
 //
         Tienda tienda = new Tienda();
-
-
+        tienda.setNombre("FAROLITO");
+        tienda.saludar();
 
 
         Producto galletita = new EnvasadoBuilder()
@@ -20,12 +20,15 @@ public class TestTienda extends Tienda {
                 .setPrecioPorUnid(350)
                 .setPorcentajeGanancia(15)
                 .setDisponible(true)
-                .setImportado(true)
+                .setImportado(false)
                 .setCantStock(1)
-                .setDescuento(20)
+                .isComestible(true)
+                .setDescuento(3)
                 .setFechaVen(2025,5,25)
                 .setCalorias(300)
                 .setTipoEnv("plastico").buildEnvasado();
+
+        galletita.toString();
 
         Producto arroz = new EnvasadoBuilder()
                 .setDescripcion("Arroz")
@@ -82,7 +85,7 @@ public class TestTienda extends Tienda {
         Producto detergente = new LimpiezaBuilder()
                 .setDescripcion("Detergente")
                 .setPrecioPorUnid(250)
-                .setPorcentajeGanancia(15)
+                .setPorcentajeGanancia(1)
                 .setDisponible(true)
                 .setImportado(false)
                 .setCantStock(20)
@@ -108,7 +111,8 @@ public class TestTienda extends Tienda {
                 .setPorcentajeGanancia(20)
                 .setDisponible(true)
                 .setCalorias(5000)
-                .setDescuento(80)
+                .setImportado(false)
+                .setDescuento(1)
                 .setCantStock(5)
                 .setTipoEnv("plastico")
                 .isComestible(true)
@@ -128,16 +132,17 @@ public class TestTienda extends Tienda {
         //Muestro los productos en stock
         tienda.mostrarProductos();
 
-//        //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
-//        for(int i = 0; i < 3; i++){
-//            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
-//        }
+        //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
+        for(int i = 0; i < 3; i++){
+            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
+        }
 
         tienda.obtenerComestiblesConMenorDescuento(10);
 //        tienda.mostrarProductos();
 
 
     }
+
 
 
 }
