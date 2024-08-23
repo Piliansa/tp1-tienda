@@ -16,11 +16,7 @@ public class Tienda extends Producto implements IVendible {
 
 
     public Tienda() {
-
     }
-
-
-
 
     public void comprarProducto(Producto producto) {
 
@@ -51,9 +47,10 @@ public class Tienda extends Producto implements IVendible {
                 System.out.println("Producto Id: " + producto.getId());
                 System.out.println("Descripción: " + producto.getDescripcion());
                 System.out.println("Cantidad de Stock comprado: " + producto.getCantStock());
-                for (String s : Arrays.asList("Precio por unidad: " + producto.precioPorUnid, "Disponibilidad: " + (producto.isDisponible() ? "SI" : "NO"), "--------------------------")) {
-                    System.out.println(s);
-                }
+                System.out.println("El saldo de la caja es: " + saldoCaja + " La cantidad de productos en listas son: " + producto.getCantStock());
+//                for (String s : Arrays.asList("Precio por unidad: " + producto.precioPorUnid, "Disponibilidad: " + (producto.isDisponible() ? "SI" : "NO"), "--------------------------")) {
+//                    System.out.println(s);
+//                }
             }
             ;
         }
@@ -63,98 +60,78 @@ public class Tienda extends Producto implements IVendible {
     @Override
     public void venderProductos() {
         List<Producto> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         final int numMaxVenta = 3;
         final int numMaxProdCate = 12;
 
 
-        for (int i = 1;i < 3;i++){
+        for (int i = 0; i < numMaxVenta; i++) {
+
             System.out.println("Ingrese el código del tipo de producto, donde AC = Bebida / AB = Envasado / AZ = Limpieza");
-            Scanner scanner = new Scanner(System.in);
-            CharSequence claveProd;
-            claveProd = scanner.nextLine();
+            CharSequence claveProd = scanner.nextLine();
             System.out.println("Ingrese el nombre del Producto que quiere vender");
             String nombreProd = scanner.nextLine();
-            productosAComprar.stream()
+            List<Producto> productosFiltro = productosAComprar.stream()
                     .filter(producto -> producto.getId().contains(claveProd))
                     .filter(producto -> producto.isDisponible)
                     .filter(producto -> producto.descripcion.equals(nombreProd))
-                    .collect(Collectors.toSet())
-                    .forEach(producto -> {
-                        System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
-                        int cantAVender = scanner.nextInt();
-                        if (cantAVender > numMaxProdCate) {
-                            System.out.println("No se pueden vender mas de 12 productos");
-                            cantAVender = 12;
-                        }
-                        if (cantAVender > producto.cantStock) {
-                            System.out.println("No hay suficiente stock, se venderán " + producto.cantStock + " unidades.");
-                            cantAVender = cantStock;
-                        }
-                        try {
-                            if (producto.isComestible) {
-                                producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
-                            }
-                        } catch (ArithmeticException e) {
-                            System.out.println("Hubo un error");
-                        }
+                    .collect(Collectors.toList());
 
-                        if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
-                            producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.1);
-                        }
-                        if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) {
-                            producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
-                        }
-                        producto.cantStock = producto.cantStock - cantAVender;
-                        System.out.println(producto.id + producto.descripcion + cantAVender + " X " + producto.precioPorUnid + producto.isComestible);
+            if (productosFiltro.isEmpty()) {
+                System.out.println("No se encontró ese tipo de producto");
 
-                    });
             }
+            Producto producto = productosFiltro.get(0);
+
+            double totalVenta = 0;
+            System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
+            int cantProdAAVender = scanner.nextInt();
+            scanner.nextLine();
+            if (cantProdAAVender > numMaxProdCate) {
+                System.out.println("No se pueden vender mas de 12 productos");
+                cantProdAAVender = 12; //vende solo el stock de venta maxima x categoria
+            }
+            if (cantProdAAVender > producto.cantStock) {
+                cantProdAAVender = producto.cantStock; //se vende solo la cantidad disponible
+            }
+            try {
+                if (producto.isComestible) {
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
+                    totalVenta = producto.precioPorUnid * cantProdAAVender;
+                } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "BAÑO") || Objects.equals(producto.tipoAplic, "ROPA")) {
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.1);
+                    totalVenta = producto.precioPorUnid * cantProdAAVender;
+                } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) {
+                    producto.precioPorUnid = producto.precioPorUnid + (producto.precioPorUnid * 0.2);
+                    totalVenta = producto.precioPorUnid * cantProdAAVender;
+                }
+                totalVenta *= cantProdAAVender;
+                System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + " precio Total: " + totalVenta);
+
+            } catch (ArithmeticException e) {
+                System.out.println("Hubo un error de cálculo");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            productosFiltro.add(producto);
+
+
+            if (i > numMaxVenta - 1) {
+                System.out.println("Desea hacer otra compra?: SI/NO");
+                String respuesta = scanner.nextLine();
+                if (!respuesta.equalsIgnoreCase("S")) {
+                    break;
+                }
+            }
+        }
+    }
+};
+
+
+//        System.out.println(productosFiltro.);
 
 
 
-    };
-
-
-
-
-
-            //-> Objects.equals(pro.getDescripcion(descripcion), "Galletitas de agua")
-
-
-}
-
-
-
-
-
-//    public HashMap getProductos(){
-//        final HashMap values = (HashMap) productosEnStock.values();
-//        return values;
-//    }
-
-//        public int getNumMaxStock () {
-//            return numMaxStock;
-//        }
-//
-//        public void setNumMaxStock ( int numMaxStock){
-//            this.numMaxStock = numMaxStock;
-//        }
-//
-//        public String getNombre () {
-//            return nombre;
-//        }
-//
-//        public void setNombre (String nombre){
-//            this.nombre = nombre;
-//        }
-//
-//        public Map<String, Producto> getProductosEnStock () {
-//            return productosEnStock;
-//        }
-//
-//        public void setProductosEnStock (Map < String, Producto > productosEnStock){
-//            this.productosEnStock = productosEnStock;
-//        }
 
 
 
@@ -164,25 +141,7 @@ public class Tienda extends Producto implements IVendible {
 
 
 
-//    public <nuevaVenta> Map<Producto id, descripcion> venderProductos() {
-//        final int ventaMax = 3;
-//        final int maxCantUnid = 12;
-//        int cantUnidades;
-//        int total;
-//        HashMap<String, String> productosVendidos;
-//
-//
-//
-//
-//        Tienda nuevaVenta = new Tienda();
-//
-//
-//        return Map.of();
-//
-//        public void buscarProductosEnCatalogo(nuevaVenta){
-//                Producto descripcion = productos.get(Producto.descripcion);
-//
-//    }
+
 
 
 

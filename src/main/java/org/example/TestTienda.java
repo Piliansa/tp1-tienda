@@ -16,7 +16,7 @@ public class TestTienda extends Tienda {
 
 
 
-        Producto envasado1 = new EnvasadoBuilder()
+        Producto galletita = new EnvasadoBuilder()
                 .setDescripcion("Galletitas de agua")
                 .setPrecioPorUnid(350)
                 .setPorcentajeGanancia(15)
@@ -26,7 +26,8 @@ public class TestTienda extends Tienda {
                 .setFechaVen(2025,5,25)
                 .setCalorias(300)
                 .setTipoEnv("plastico").buildEnvasado();
-        Producto envasado2 = new EnvasadoBuilder()
+
+        Producto arroz = new EnvasadoBuilder()
                 .setDescripcion("Arroz")
                 .setCantStock(2)
                 .setPrecioPorUnid(1050)
@@ -37,7 +38,7 @@ public class TestTienda extends Tienda {
                 .setFechaVen(2025, 3, 3)
                 .setTipoEnv("plastico").buildEnvasado();
 
-        Producto bebida1 = new BebidaBuilder()
+        Producto cocaCola = new BebidaBuilder()
                 .setDescripcion("Coca Cola")
                 .setPrecioPorUnid(1600)
                 .setPorcentajeGanancia(20)
@@ -52,7 +53,7 @@ public class TestTienda extends Tienda {
                 .buildBebida();
 
 
-        Producto limpieza1 = new LimpiezaBuilder()
+        Producto limpiaVidrio = new LimpiezaBuilder()
                 .setDescripcion("Limpia vidrios")
                 .setPrecioPorUnid(250)
                 .setPorcentajeGanancia(15)
@@ -62,12 +63,60 @@ public class TestTienda extends Tienda {
                 .setTipoAplic("MULTIUSO")
                 .buildLimpieza();
 
-        tienda.comprarProducto(envasado1);
-        tienda.comprarProducto(envasado2);
-        tienda.comprarProducto(bebida1);
-        tienda.comprarProducto(limpieza1);
+        Producto lavandina = new LimpiezaBuilder()
+                .setDescripcion("Lavandina")
+                .setPrecioPorUnid(250)
+                .setPorcentajeGanancia(15)
+                .setDisponible(true)
+                .setCantStock(20)
+                .setTipoEnv("plastico")
+                .setTipoAplic("BAÑO")
+                .buildLimpieza();
+
+        Producto detergente = new LimpiezaBuilder()
+                .setDescripcion("Detergente")
+                .setPrecioPorUnid(250)
+                .setPorcentajeGanancia(15)
+                .setDisponible(true)
+                .setCantStock(20)
+                .setTipoEnv("plastico")
+                .setTipoAplic("COCINA")
+                .buildLimpieza();
+
+        Producto trapo = new LimpiezaBuilder()
+                .setDescripcion("Trapo")
+                .setPrecioPorUnid(250)
+                .setPorcentajeGanancia(15)
+                .setDisponible(true)
+                .setCantStock(20)
+                .setTipoEnv("Tela")
+                .setTipoAplic("MULTIUSO")
+                .buildLimpieza();
+
+        Producto cerveza = new BebidaBuilder()
+                .setDescripcion("Cerveza")
+                .setPrecioPorUnid(1600)
+                .setPorcentajeGanancia(20)
+                .setDisponible(true)
+                .setCalorias(5000)
+                .setCantStock(5)
+                .setTipoEnv("plastico")
+                .isComestible(true)
+                .setGradAlcohol(4)
+                .setFechaVen(2026, 3,5)
+                .buildBebida();
+
+        tienda.comprarProducto(galletita);
+        tienda.comprarProducto(arroz);
+        tienda.comprarProducto(cerveza);
+        tienda.comprarProducto(detergente);
+        tienda.comprarProducto(cocaCola);
+        tienda.comprarProducto(trapo);
+        tienda.comprarProducto(lavandina);
+        tienda.comprarProducto(limpiaVidrio);
         tienda.mostrarProductos();
         tienda.venderProductos();
+//        tienda.mostrarProductos();
 
 
     }
