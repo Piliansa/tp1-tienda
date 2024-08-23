@@ -16,8 +16,15 @@ public class Producto {
     protected LocalDate fechaVen;
     protected boolean isComestible;
     protected String tipoAplic;
+    protected int descuento;
 
+    public void setDescuento(int descuento) {
+        this.descuento = descuento;
+    }
 
+    public int getDescuento() {
+        return descuento;
+    }
 //    protected int calorias;
 
     //Constructor vacio
@@ -25,44 +32,18 @@ public class Producto {
     }
 
     //Getters y Setters
-
     public String getId() {
         return id;
     }
-
     public String getDescripcion() {
         return this.descripcion;
     }
-
     public int getCantStock() {
         return cantStock;
     }
-
     public double getPrecioPorUnid() {
         return precioPorUnid;
     }
-
-    public double getPorcentajeGanancia() {
-        return porcentajeGanancia;
-    }
-
-    public boolean isDisponible() {
-        return isDisponible;
-    }
-
-    public boolean isImportado() {
-        return isImportado;
-    }
-
-    public int getCalorias() {
-        return calorias;
-    }
-
-    public String getTipoEnv() {return tipoEnv;}
-
-    public LocalDate getFechaVen() {return fechaVen;}
-
-
 
     public String setId(String id) {
         this.id = id;
@@ -72,42 +53,25 @@ public class Producto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public void setCantStock(int cantStock) {
         this.cantStock = cantStock;
     }
-
     public void setPrecioPorUnid(double precioPorUnid) {
         this.precioPorUnid = precioPorUnid;
     }
-
     public void setPorcentajeGanancia(double porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
     }
-
     public void setDisponible(boolean disponible) {
         isDisponible = disponible;
     }
-
     public void setImportado(boolean importado) {
         isImportado = importado;
     }
-
-    public void setCalorias(int calorias) {
-        this.calorias = calorias;
-    }
-
-    public void setTipoEnv(String tipoEnv) {
-        this.tipoEnv = tipoEnv;
-    }
-
-    public void setFechaVen(LocalDate fechaVen) {
-        this.fechaVen = fechaVen;
-    }
-
-    public void setComestible(boolean comestible) {
-        isComestible = comestible;
-    }
+    public void setCalorias(int calorias) {this.calorias = calorias;}
+    public void setTipoEnv(String tipoEnv) {this.tipoEnv = tipoEnv;}
+    public void setFechaVen(LocalDate fechaVen) {this.fechaVen = fechaVen;}
+    public void setComestible(boolean comestible) {isComestible = comestible;}
 
     protected double setPrecioPorUnidad(double v) {
         this.precioPorUnid = v;
@@ -124,6 +88,7 @@ public class Producto {
                 ", porcentajeGanancia=" + porcentajeGanancia +
                 ", isDisponible=" + isDisponible +
                 ", isImportado=" + isImportado +
+                ", Porcentaje de Descuento a aplicar: " + descuento +
                 ", calorias=" + calorias +
                 '}';
     }

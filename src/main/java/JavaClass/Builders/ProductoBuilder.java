@@ -23,6 +23,77 @@ public class ProductoBuilder implements IBuilder<ProductoBuilder>  {
     private LocalDate fechaVen;
     private boolean isComestible;
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public double getPrecioPorUnid() {
+        return precioPorUnid;
+    }
+
+    public double getPorcentajeGanancia() {
+        return porcentajeGanancia;
+    }
+
+    public boolean isDisponible() {
+        return isDisponible;
+    }
+
+    public boolean isImportado() {
+        return isImportado;
+    }
+
+    public int getCalorias() {
+        return calorias;
+    }
+
+    public String getTipoEnv() {
+        return tipoEnv;
+    }
+
+    public double getGradAlcohol() {
+        return gradAlcohol;
+    }
+
+    public String getTipoAplic() {
+        return tipoAplic;
+    }
+
+    public int getCantStock() {
+        return cantStock;
+    }
+
+    public LocalDate getFechaVen() {
+        return fechaVen;
+    }
+
+    public boolean isComestible() {
+        return isComestible;
+    }
+
+    public int getDescuento() {
+        return descuento;
+    }
+
+    public static int getLimpiezaCount() {
+        return limpiezaCount;
+    }
+
+    public static int getEnvasadoCount() {
+        return envasadoCount;
+    }
+
+    public static int getBebidaCount() {
+        return bebidaCount;
+    }
+
+    private int descuento;
+
+    public ProductoBuilder setDescuento(int descuento) {
+        this.descuento = descuento;
+        return this;
+    }
+
     //especificos para Ids:
     protected static int limpiezaCount = 0;
     protected static int envasadoCount = 0;

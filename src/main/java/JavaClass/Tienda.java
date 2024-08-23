@@ -55,9 +55,7 @@ public class Tienda extends Producto implements IVendible {
 //                    System.out.println(s);
 //                }
             }
-            ;
         }
-        ;
     }
 
     @Override
@@ -129,6 +127,25 @@ public class Tienda extends Producto implements IVendible {
                 .sum();
 
         System.out.println("El stock total de la tienda es de " + stockTotal + " productos.");
+    }
+
+    public void obtenerComestiblesConMenorDescuento(double porcentaje_descuento){
+        try{
+            List<Producto> listaProdConDesc = productosAComprar.stream()
+                    .filter(prod -> isComestible)
+                    .filter(prod -> !prod.isImportado)
+                    .filter(prod -> prod.descuento < porcentaje_descuento)
+                    .sorted(Comparator.comparingDouble(Producto::getDescuento))
+                    .collect(Collectors.toList());
+            listaProdConDesc.forEach(prod -> System.out.println(prod.getDescripcion()));
+
+
+
+        } catch (RuntimeException e){
+            System.out.println("No se pudo hacer la operacion");
+        }
+
+
     }
 }
 
