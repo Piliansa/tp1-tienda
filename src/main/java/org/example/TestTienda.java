@@ -132,12 +132,16 @@ public class TestTienda extends Tienda {
         //Muestro los productos en stock
         tienda.mostrarProductos();
 
-        //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
-        for(int i = 0; i < 3; i++){
-            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
-        }
 
-        tienda.obtenerComestiblesConMenorDescuento(10);
+        //REALIZAR VENTA |---
+        //---------------|---
+        //---------------V---
+        //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
+//        for(int i = 0; i < 3; i++){
+//            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
+//        }
+        //Probar ver los productos con menor descuentos ordenados de manera ascendente:
+        //   tienda.obtenerComestiblesConMenorDescuento(10);
 //        tienda.mostrarProductos();
 
 
