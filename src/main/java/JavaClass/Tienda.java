@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class Tienda extends Producto implements IVendible {
     private String nombre;
     private int numMaxStock = 500;
-    private double saldoCaja = 10000000;
-    private final static double IVA = 0.21;
+    private double saldoCaja = 1000000;
+    private final static double IVA = 1.21;
     private List<Producto> productosAComprar = new ArrayList<>();
     private int cantStockInventario = productosAComprar.size();
 
@@ -32,6 +32,7 @@ public class Tienda extends Producto implements IVendible {
     public void comprarProducto(Producto producto) {
         double costoTotalProdSinIva = producto.getPrecioPorUnid() * producto.getCantStock();
         double costoTotalProducto = producto.getPrecioPorUnid() * producto.getCantStock() + (producto.getPrecioPorUnid()*IVA) * producto.getCantStock();
+        System.out.println(costoTotalProducto);
         if (costoTotalProducto > saldoCaja) {
             System.out.println("No se puede agregar el producto por saldo insuficiente en la caja.");
         } else if (productosAComprar.size() > cantStockInventario) {
@@ -40,11 +41,11 @@ public class Tienda extends Producto implements IVendible {
             saldoCaja -= costoTotalProducto;
             productosAComprar.add(producto);
             cantStockInventario = productosAComprar.size() + cantStockInventario;
-            System.out.println("producto agregado");
-            System.out.println("la cantidad de productos en lista son: " + cantStockInventario);
-            System.out.println("El saldo de la caja es: " + saldoCaja);
-            System.out.println("Sin iva: " + costoTotalProdSinIva);
-            System.out.println("Productos con iva: " + costoTotalProducto);
+            System.out.println("producto " + producto.descripcion + " agregado.");
+//            System.out.println("la cantidad de productos en lista son: " + cantStockInventario);
+//            System.out.println("El saldo de la caja es: " + saldoCaja);
+//            System.out.println("Sin iva: " + costoTotalProdSinIva);
+//            System.out.println("Productos con iva: " + costoTotalProducto);
         }
 
 
@@ -59,7 +60,7 @@ public class Tienda extends Producto implements IVendible {
             for (Producto producto : productosAComprar) {
                 System.out.println("Producto Id: " + producto.getId());
                 System.out.println("Descripción: " + producto.getDescripcion());
-                System.out.println("Cantidad de Stock comprado: " + producto.getCantStock());
+//                System.out.println("Cantidad de Stock comprado: " + productosAComprar.); //REVISAR
                 System.out.println("El saldo de la caja es: " + saldoCaja + " La cantidad de productos en listas son: " + producto.getCantStock());
 //                for (String s : Arrays.asList("Precio por unidad: " + producto.precioPorUnid, "Disponibilidad: " + (producto.isDisponible() ? "SI" : "NO"), "--------------------------")) {
 //                    System.out.println(s);
@@ -137,7 +138,7 @@ public class Tienda extends Producto implements IVendible {
                 .mapToInt(Producto::getCantStock)
                 .sum();
 
-        System.out.println("El stock total de la tienda es de " + stockTotal + " productos.");
+        System.out.println("EL STOCK DE LA TIENDA ES " + stockTotal + " PRODUCTOS.");
     }
 
 

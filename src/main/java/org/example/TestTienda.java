@@ -9,16 +9,23 @@ import JavaClass.Tienda;
 
 public class TestTienda extends Tienda {
     public static void main(String[] args) {
-//
+//private static Tienda inicializarTienda(String nombre) {
+//        Tienda tienda = new Tienda();
+//        tienda.setNombre(nombre);
+//        tienda.saludar();
+//        return tienda;
+//        Tienda tienda = inicializarTienda("FAROLITO");
+
         Tienda tienda = new Tienda();
         tienda.setNombre("FAROLITO");
         tienda.saludar();
 
 
+        //Creacion de productos:
         Producto galletita = new EnvasadoBuilder()
                 .setDescripcion("Galletitas de agua")
                 .setPrecioPorUnid(350)
-                .setPorcentajeGanancia(15)
+                .setPorcentajeGanancia(15) //Agrego % ganancia sabiendo que
                 .setDisponible(true)
                 .setImportado(false)
                 .setCantStock(1)
@@ -28,7 +35,7 @@ public class TestTienda extends Tienda {
                 .setCalorias(300)
                 .setTipoEnv("plastico").buildEnvasado();
 
-        galletita.toString();
+
 
         Producto arroz = new EnvasadoBuilder()
                 .setDescripcion("Arroz")
@@ -113,6 +120,21 @@ public class TestTienda extends Tienda {
                 .setCalorias(5000)
                 .setImportado(false)
                 .setDescuento(1)
+                .setCantStock(200)
+                .setTipoEnv("plastico")
+                .isComestible(true)
+                .setGradAlcohol(4)
+                .setFechaVen(2026, 3,5)
+                .buildBebida();
+
+        Producto jugoFruta = new BebidaBuilder()
+                .setDescripcion("Jugo")
+                .setPrecioPorUnid(900)
+                .setDisponible(true)
+                .setPorcentajeGanancia(20)
+                .setCalorias(5000)
+                .setImportado(false)
+                .setDescuento(1)
                 .setCantStock(5)
                 .setTipoEnv("plastico")
                 .isComestible(true)
@@ -120,7 +142,8 @@ public class TestTienda extends Tienda {
                 .setFechaVen(2026, 3,5)
                 .buildBebida();
 
-        //Hago algunas compras para agregar productos a mi inventario
+
+
         tienda.comprarProducto(galletita);
         tienda.comprarProducto(arroz);
         tienda.comprarProducto(cerveza);
@@ -129,6 +152,8 @@ public class TestTienda extends Tienda {
         tienda.comprarProducto(trapo);
         tienda.comprarProducto(lavandina);
         tienda.comprarProducto(limpiaVidrio);
+        //Hago algunas compras para agregar productos a mi inventario
+
         //Muestro los productos en stock
         tienda.mostrarProductos();
 
@@ -137,16 +162,32 @@ public class TestTienda extends Tienda {
         //---------------|---
         //---------------V---
         //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
-//        for(int i = 0; i < 3; i++){
-//            tienda.venderProductos(); //itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
-//        }
+        for(int i = 0; i < 3; i++){
+            tienda.venderProductos();
+            tienda.mostrarProductos();//itero tres veces el vender un producto como forma de limitar las ventas a tres productos.
+        }
         //Probar ver los productos con menor descuentos ordenados de manera ascendente:
         //   tienda.obtenerComestiblesConMenorDescuento(10);
 //        tienda.mostrarProductos();
 
 
-    }
 
+
+
+
+
+//        tienda.comprarProducto(yerba);
+//        tienda.comprarProducto(limpiaVidrio);
+//        tienda.comprarProducto(limpiaVidrio);
+//        tienda.comprarProducto(limpiaVidrio);
+//        tienda.comprarProducto(limpiaVidrio);
+
+
+
+
+
+
+    }
 
 
 }
