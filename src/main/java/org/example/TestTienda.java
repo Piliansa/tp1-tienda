@@ -7,18 +7,15 @@ import JavaClass.Builders.LimpiezaBuilder;
 import JavaClass.Producto;
 import JavaClass.Tienda;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestTienda extends Tienda {
     public static void main(String[] args) {
-//private static Tienda inicializarTienda(String nombre) {
-//        Tienda tienda = new Tienda();
-//        tienda.setNombre(nombre);
-//        tienda.saludar();
-//        return tienda;
-//        Tienda tienda = inicializarTienda("FAROLITO");
-
         Tienda tienda = new Tienda();
         tienda.setNombre("FAROLITO");
         tienda.saludar();
+        List<Producto> detalleVenta = new ArrayList<>();
 
 
         //Creacion de productos:
@@ -162,11 +159,13 @@ public class TestTienda extends Tienda {
         //---------------|---
         //---------------V---
         //Realizo una venta donde me pedirá el codigo de tipo de producto, su nombre, y la cantidad de productos que quiero vender de c/u.
-        for(int i = 0; i < 3; i++){
-            tienda.venderProductos();   //itero tres veces el vender un producto como forma de limitar las ventas a tres productos. FALTA IMPRIMIR CORRECTAMENTE
+
+        int topeDeVentas = 3;
+        for(int i = 0; i < topeDeVentas; i++){
+            tienda.venderProductos();//itero tres veces el vender un producto como forma de limitar las ventas a tres productos. FALTA IMPRIMIR CORRECTAMENTE
         }
-        //Probar ver los productos con menor descuentos ordenados de manera ascendente:
-        //   tienda.obtenerComestiblesConMenorDescuento(10);
+  //----VER PRODUCTOS NO IMPORTADOS COMESTIBLES CUYO DESCUENTO SEA < AL PORCENTAJE PASADO POR PARAMETRO:
+        tienda.obtenerComestiblesConMenorDescuento(10);
 //        tienda.mostrarProductos();
 
 
