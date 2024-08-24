@@ -77,28 +77,27 @@ public class Tienda extends Producto implements IVendible {
         final int numMaxProdCate = 12;
 
 
-
-
+        try {
+            double totalVenta = 0;
             System.out.println("Ingrese el código del tipo de producto, donde AC = Bebida / AB = Envasado / AZ = Limpieza");
-            CharSequence claveProd = scanner.nextLine();
+            CharSequence claveProd = scanner.nextLine().toUpperCase(); //trim() y toUpperCaser() evitan errores
             System.out.println("Ingrese el nombre del Producto que quiere vender");
-            String nombreProd = scanner.nextLine();
+            String nombreProd = scanner.nextLine().trim().toUpperCase();
             List<Producto> productosFiltro = productosAComprar.stream()
                     .filter(producto -> producto.getId().contains(claveProd))
                     .filter(producto -> producto.isDisponible)
                     .filter(producto -> producto.descripcion.equals(nombreProd))
                     .collect(Collectors.toList());
-
             if (productosFiltro.isEmpty()) {
                 System.out.println("No se encontró ese tipo de producto");
-
+                return;
             }
-            Producto producto = productosFiltro.get(0);
+            Producto producto = productosFiltro.get(0); //obtenemos el primer producto filtrado con el nombre que queremos
 
-            double totalVenta = 0;
             System.out.println("Ingrese la cantidad de productos " + nombreProd + " que quiere vender:");
             int cantProdAAVender = scanner.nextInt();
-            scanner.nextLine();
+
+            scanner.nextLine(); // Evita error de lectura
             if (cantProdAAVender > numMaxProdCate) {
                 System.out.println("No se pueden vender mas de 12 productos");
                 cantProdAAVender = 12; //vende solo el stock de venta maxima x categoria
@@ -106,18 +105,18 @@ public class Tienda extends Producto implements IVendible {
             if (cantProdAAVender > producto.cantStock) {
                 cantProdAAVender = producto.cantStock; //se vende solo la cantidad disponible
             }
-            if(producto.isImportado){
-                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.12);
+            if (producto.isImportado) {
+                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid() * 0.12);
             }
             if (producto.isComestible) {
-                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid()* 0.2); //Los productos comestibles no pueden superar un 20% de ganancia
-            } else if(!producto.isComestible && claveProd == "AZ"){ //Los de limpieza son siempre NO COMESTIBLES
+                producto.setPrecioPorUnidad(producto.getPrecioPorUnid() + producto.getPrecioPorUnid() * 0.2); //Los productos comestibles no pueden superar un 20% de ganancia
+            } else if (!producto.isComestible && claveProd == "AZ") { //Los de limpieza son siempre NO COMESTIBLES
                 try {
-                        if (producto.tipoAplic == "BAÑO"|| producto.tipoAplic == "ROPA") {
-                            producto.setPrecioPorUnidad(producto.getPrecioConDescuento()); //suma el porcentaje de ganancia que no puede superar el 10%
-                        } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) { //salvo los "MULTIUSO" O "COCINA" que no tienen minimo en este caso le ponemos un 20%
-                            producto.setPrecioPorUnidad(producto.getPrecioConDescuento());
-                        }
+                    if (producto.tipoAplic == "BAÑO" || producto.tipoAplic == "ROPA") {
+                        producto.setPrecioPorUnidad(producto.getPrecioConDescuento()); //suma el porcentaje de ganancia que no puede superar el 10%
+                    } else if (claveProd == "AZ" && Objects.equals(producto.tipoAplic, "MULTIUSO") || Objects.equals(producto.tipoAplic, "COCINA")) { //salvo los "MULTIUSO" O "COCINA" que no tienen minimo en este caso le ponemos un 20%
+                        producto.setPrecioPorUnidad(producto.getPrecioConDescuento());
+                    }
                 } catch (ArithmeticException e) {
                     System.out.println("Hubo un error de cálculo");
                 } catch (Exception e) {
@@ -125,20 +124,29 @@ public class Tienda extends Producto implements IVendible {
                 }
                 productosFiltro.add(producto);
             }
-            producto.setCantStock(producto.getCantStock() - cantProdAAVender);
+            producto.setCantStock(producto.getCantStock() - cantProdAAVender); //Acá modifico el stock del tipo de producto restando la cantidad que vendí
 
-            totalVenta = cantProdAAVender*producto.getPrecioPorUnid();
-            saldoCaja = saldoCaja + totalVenta ;
+            totalVenta = cantProdAAVender * producto.getPrecioPorUnid();
+            saldoCaja = saldoCaja + totalVenta;
             System.out.println(producto.id + " " + producto.descripcion + " " + cantProdAAVender + " X " + producto.precioPorUnid + " " + producto.isComestible + "\n precio Total: $" + totalVenta + "\n El saldo de caja es $ " + saldoCaja + "\n" + producto.cantStock + " Es lo que queda de producto en stock");
 
         mostrarStockTotal();
+
+        } catch (InputMismatchException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (NoSuchElementException e) {
+            System.out.println("No se pudo encontrar el producto: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         };
+
+};
     public void mostrarStockTotal(){
         int stockTotal = productosAComprar.stream()
                 .mapToInt(Producto::getCantStock)
                 .sum();
 
-        System.out.println("EL STOCK DE LA TIENDA ES " + stockTotal + " PRODUCTOS.");
+        System.out.println("VENTA REALIZADA - EL STOCK DE LA TIENDA ES " + stockTotal + " PRODUCTOS.");
     }
 
 

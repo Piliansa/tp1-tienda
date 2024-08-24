@@ -20,7 +20,7 @@ public class TestTienda extends Tienda {
 
         //Creacion de productos:
         Producto galletita = new EnvasadoBuilder()
-                .setDescripcion("Galletitas de agua")
+                .setDescripcion("GALLETITAS")
                 .setPrecioPorUnid(350)
                 .setPorcentajeGanancia(15) //Agrego % ganancia sabiendo que
                 .setDisponible(true)
@@ -35,7 +35,7 @@ public class TestTienda extends Tienda {
 
 
         Producto arroz = new EnvasadoBuilder()
-                .setDescripcion("Arroz")
+                .setDescripcion("ARROZ")
                 .setCantStock(2)
                 .setPrecioPorUnid(1050)
                 .setPorcentajeGanancia(15)
@@ -47,7 +47,7 @@ public class TestTienda extends Tienda {
                 .setTipoEnv("plastico").buildEnvasado();
 
         Producto cocaCola = new BebidaBuilder()
-                .setDescripcion("Coca Cola")
+                .setDescripcion("COCA COLA")
                 .setPrecioPorUnid(1600)
                 .setPorcentajeGanancia(20)
                 .setDisponible(true)
@@ -63,43 +63,43 @@ public class TestTienda extends Tienda {
 
 
         Producto limpiaVidrio = new LimpiezaBuilder()
-                .setDescripcion("Limpia vidrios")
+                .setDescripcion("LIMPIA VIDRIOS")
                 .setPrecioPorUnid(250)
                 .setPorcentajeGanancia(15)
                 .setImportado(true)
                 .setDisponible(true)
                 .setCantStock(20)
                 .setDescuento(3)
-                .setTipoEnv("plastico")
+                .setTipoEnv("PLASTICO")
                 .setTipoAplic("MULTIUSO")
                 .buildLimpieza();
 
         Producto lavandina = new LimpiezaBuilder()
-                .setDescripcion("Lavandina")
+                .setDescripcion("LAVANDINA")
                 .setPrecioPorUnid(250)
                 .setPorcentajeGanancia(15)
                 .setDisponible(true)
                 .setImportado(false)
                 .setCantStock(20)
                 .setDescuento(3)
-                .setTipoEnv("plastico")
+                .setTipoEnv("PLASTICO")
                 .setTipoAplic("BAÑO")
                 .buildLimpieza();
 
         Producto detergente = new LimpiezaBuilder()
-                .setDescripcion("Detergente")
+                .setDescripcion("DETERGENTE")
                 .setPrecioPorUnid(250)
                 .setPorcentajeGanancia(1)
                 .setDisponible(true)
                 .setImportado(false)
                 .setCantStock(20)
                 .setDescuento(1)
-                .setTipoEnv("plastico")
+                .setTipoEnv("PLASTICO")
                 .setTipoAplic("COCINA")
                 .buildLimpieza();
 
         Producto trapo = new LimpiezaBuilder()
-                .setDescripcion("Trapo")
+                .setDescripcion("TRAPO")
                 .setPrecioPorUnid(250)
                 .setPorcentajeGanancia(15)
                 .setDisponible(true)
@@ -110,7 +110,7 @@ public class TestTienda extends Tienda {
                 .buildLimpieza();
 
         Producto cerveza = new BebidaBuilder()
-                .setDescripcion("Cerveza")
+                .setDescripcion("CERVEZA")
                 .setPrecioPorUnid(1600)
                 .setPorcentajeGanancia(20)
                 .setDisponible(true)
@@ -118,14 +118,14 @@ public class TestTienda extends Tienda {
                 .setImportado(false)
                 .setDescuento(1)
                 .setCantStock(200)
-                .setTipoEnv("plastico")
+                .setTipoEnv("VIDRIO")
                 .isComestible(true)
                 .setGradAlcohol(4)
                 .setFechaVen(2026, 3,5)
                 .buildBebida();
 
         Producto jugoFruta = new BebidaBuilder()
-                .setDescripcion("Jugo")
+                .setDescripcion("JUGO")
                 .setPrecioPorUnid(900)
                 .setDisponible(true)
                 .setPorcentajeGanancia(20)
@@ -133,7 +133,7 @@ public class TestTienda extends Tienda {
                 .setImportado(false)
                 .setDescuento(1)
                 .setCantStock(5)
-                .setTipoEnv("plastico")
+                .setTipoEnv("PLASTICO")
                 .isComestible(true)
                 .setGradAlcohol(4)
                 .setFechaVen(2026, 3,5)
@@ -149,6 +149,7 @@ public class TestTienda extends Tienda {
         tienda.comprarProducto(trapo);
         tienda.comprarProducto(lavandina);
         tienda.comprarProducto(limpiaVidrio);
+        tienda.comprarProducto(jugoFruta);
         //Hago algunas compras para agregar productos a mi inventario
 
         //Muestro los productos en stock
